@@ -1,9 +1,9 @@
 
 /*
- * Nom du fichier: Exercices_semaines1.c
+ * Nom du fichier: Exercices_semaines2.c
  * Auteur: Thanisma Even Marcelin
- * Date: 2024/05/06
- * Description:Listes d'exercices de la semaine 1 pour le cours d'INF147
+ * Date: 2024/05/18
+ * Description:Listes d'exercices de la semaine 2 pour le cours d'INF147
  */
 
 #define _CRT_SECURE_NO_WARNINGS // pour ignorer les erreurs pour scanf_s
@@ -16,20 +16,10 @@
 #include <math.h>
 #include <time.h>
 
-// variables globales
-double rayon = 0;
-double aire_cercle = 0;
-double largeur = 0;
-double longueur = 0;
-double aire_rectangle = 0;
-int duree;
-double montant_initial;
-double taux_interet;
-double montant_final;
 
 // declaration de mes sous fonctions
-void calculer_aire_cercle();
-void calculer_aire_rectangle();
+double calculer_aire_cercle(double rayon);
+double calculer_aire_rectangle(double largeur, double longueur);
 void calculer_aire_piece();
 void ex_2();
 double ex_3(int pop_totale);
@@ -46,14 +36,18 @@ void ex_10();
 /*
 *Nom de l'exercice: Exercices_semaines1.c
 * main()
-* Description:programme qui test les differents exercices de la semaine 1
-* Paramètres: aucun
+* Description:programme qui test les differents exercices de la semaine 2
+* ParamÃ¨tres: aucun
 * Retour : status de la fin du programme
 */
 int main() {
 
 	int choix;
 	int population = 0;
+	double rayon = 0.0, aire_cercle = 0.0;
+	double largeur = 0.0, longueur = 0.0, aire_rectangle = 0.0;
+	int duree = 0;
+	double montant_initial = 0.0, taux_interet = 0.0, montant_final = 0.0;
 
 	printf("Menu des exercices de la semaine1 :\n");
 	printf(" 1 => ex_1_a\n");
@@ -78,19 +72,21 @@ int main() {
 
 		switch (choix) {
 		case 1:
-			printf("\nCe programe permet de calculer l’aire d’un cercle => \n\n");
-			calculer_aire_cercle();
+			printf("\nCe programe permet de calculer lâ€™aire dâ€™un cercle => \n\n");
+			calculer_aire_cercle(rayon);
+			printf("L'aire du cercle est: %.2lf\n", aire_cercle);
 			break;
 		case 2:
-			printf("\nCe programe permet de calculer l’aire d’un rectangle => \n\n");
-			calculer_aire_rectangle();
+			printf("\nCe programe permet de calculer lâ€™aire dâ€™un rectangle => \n\n");
+			calculer_aire_rectangle(largeur, longueur);
+			printf("L'aire du rectangle est: %.2lf\n", aire_rectangle);
 			break;
 		case 3:
-			printf("\nCe programe permet de calculer l’aire d’une piece => \n\n");
+			printf("\nCe programe permet de calculer lâ€™aire dâ€™une piece => \n\n");
 			calculer_aire_piece();
 			break;
 		case 4:
-			printf("\nCe programe  permet d’obtenir la valeur d’un point x de type double sur une courbe => \n\n");
+			printf("\nCe programe  permet dâ€™obtenir la valeur dâ€™un point x de type double sur une courbe => \n\n");
 			ex_2();
 			break;
 		case 5:
@@ -112,7 +108,7 @@ int main() {
 			break;
 		case 9:
 			printf("\nCe programe permet de calculer le montant final d'un placement => \n\n");
-			ex_7(duree, montant_initial,taux_interet, montant_final);
+			ex_7(duree, montant_initial, taux_interet, montant_final);
 			break;
 			/*case 10:
 			printf("\nCe programe permet d'echanger deux valeurs en memoire => \n\n");
@@ -127,10 +123,10 @@ int main() {
 			Suppl_Ex4();
 			break; */
 		case 13:
-			printf("La vie d'un futur  ingenieur est comme un code à deboguer:");
+			printf("La vie d'un futur  ingenieur est comme un code Ã  deboguer:");
 			printf("chaque probleme est une enigme a resoudre, et chaque \n");
 			printf("solution nous rapproche un peu plus de la perfection.\n");
-			printf("Ainsi, chaque défi est une opportunité de croissance,\n");
+			printf("Ainsi, chaque dÃ©fi est une opportunitÃ© de croissance,\n");
 			printf("et chaque obstacle surmonte est une preuve\n");
 			printf("de sa determination et de son ingeniosite.");
 			break;
@@ -138,7 +134,7 @@ int main() {
 			printf("Fin du programme.\n");
 			break;
 		default:
-			printf("Choix invalide. Veuillez réessayer.\n");
+			printf("Choix invalide. Veuillez rÃ©essayer.\n");
 		}
 
 	} while (choix != 14);
@@ -148,37 +144,42 @@ int main() {
 	return EXIT_SUCCESS;
 }
 
-void calculer_aire_cercle() {
-	
-	printf("Veuillez entrer une valeure decimale pour le rayon: \n");
-	scanf(" %lf", &rayon);
-
-	aire_cercle = M_PI * rayon * rayon;
-
-	printf("L'aire du cercle est: %.2lf\n", aire_cercle);
+double calculer_aire_cercle(double rayon) {
+	return M_PI * rayon;
 }
 
-void calculer_aire_rectangle() {
+double calculer_aire_rectangle(double largeur, double longueur) {
+	return largeur * longueur;
+}
+
+
+void calculer_aire_piece() {
+	double diametre = 0.0;
+	double aire_piece = 0.0;
+	double aire_rectangle = 0.0;
+	double aire_cercle = 0.0;
+	double largeur = 0.0;
+	double longueur = 0.0;
+	double rayon = 0.0;
+
+	printf("Veuillez entrer une valeure decimale pour le rayon: \n");
+	scanf(" %lf", &rayon);
 
 	printf("Veuillez entrer la largeur du rectangle: \n");
 	scanf(" %lf", &largeur);
 
-	printf("Veuillez entrer la longueur du rectangle: \n");
-	scanf(" %lf", &longueur);
+	printf("Veuillez entrer la largeur du rectangle: \n");
+	scanf(" %lf", &largeur);
 
-	aire_rectangle = longueur * largeur;
+
+	calculer_aire_cercle(rayon);
+	calculer_aire_rectangle(largeur, longueur);
+    
+	diametre = rayon * 2;
 
 	printf("L'aire du rectangle est: %.2lf\n", aire_rectangle);
-}
+	printf("L'aire du cercle est: %.2lf\n", aire_cercle);
 
-void calculer_aire_piece() {
-	double diametre = 0;
-	double aire_piece     = 0;
-
-	calculer_aire_cercle();
-	calculer_aire_rectangle();
-
-	diametre = rayon * 2;
 
 	if (diametre < (longueur * FACTEUR_DE_SECURITE) && diametre < (largeur * FACTEUR_DE_SECURITE)) {
 		aire_piece = aire_rectangle - aire_cercle;
@@ -186,7 +187,8 @@ void calculer_aire_piece() {
 		printf("L'aire de la piece est: %.2lf\n", aire_piece);
 	}
 	else {
-		printf("le facteur de securite n’a pas ete respecte");
+		printf("le facteur de securite nâ€™a pas ete respecte");
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -201,6 +203,14 @@ void ex_2() {
 
 	printf("La valeur du point x rechercher est: %lf\n", fonction);
 }
+
+
+/*
+* Nom de l'exercice: ex_3
+* Description: Ce programe permet de savoir quand un certain nombre de cellules de levures a ete atteint
+* ParamÃ¨tres: 1
+* Retour : temps_requis
+*/
 
 double ex_3(int pop_totale) {
 
@@ -246,7 +256,7 @@ void ex_4() {
 			printf("Fin du programme.\n");
 			break;
 		default:
-			printf("Choix invalide! Veuillez réessayer.\n");
+			printf("Choix invalide! Veuillez rÃ©essayer.\n");
 		}
 
 	} while (choix != 5);
@@ -267,7 +277,7 @@ void ex_5() {
 		printf(" [%d],\t", i);
 	}
 	printf("\n\n\nLes valeurs du troisieme compteur sont : %d\n", i);
-	for (int i = 100; i <= 200; i+=5) {
+	for (int i = 100; i <= 200; i += 5) {
 
 		printf(" [%d],\t", i);
 	}
@@ -284,19 +294,28 @@ void ex_6() {
 
 	printf("  Les valeurs du compteurs de la seconde boucle sont: ");
 	for (int i = 1; i <= 100; i++) {
-		for (int j = i; j <= 100; j+=2) {
+		for (int j = i; j <= 100; j += 2) {
 
 			printf(" [%d],\t", j);
 		}
 	}
 }
 
+
+/*
+* Nom de l'exercice: ex_7
+* Description: Ce programe permet de calculer le montant final d'un placement
+* ParamÃ¨tres: 4
+* Retour : montant_final
+*/
+
 double ex_7(int duree, double montant_initial, double taux_interet, double montant_final) {
 
-	montant_initial = 0;
-	taux_interet = 0;
-	montant_final = 0;
-	double taux = 0;
+	montant_initial = 0.0;
+	taux_interet = 0.0;
+	montant_final = 0.0;
+	duree = 0;
+	double taux = 0.0;
 
 	printf("Quel est le montant initial: ");
 	scanf(" %lf", &montant_initial);
