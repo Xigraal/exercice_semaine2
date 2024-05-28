@@ -1,4 +1,3 @@
-
 /*
  * Nom du fichier: Exercices_semaines2.c
  * Auteur: Thanisma Even Marcelin
@@ -17,18 +16,18 @@
 #include <time.h>
 
 
-// declaration de mes sous fonctions
-double calculer_aire_cercle(double rayon);
-double calculer_aire_rectangle(double largeur, double longueur);
+ // declaration de mes sous fonctions
+double calculer_aire_cercle(double);
+double calculer_aire_rectangle(double , double);
 void calculer_aire_piece();
 void ex_2();
-double ex_3(int pop_totale);
+double ex_3(int);
 void ex_4();
 void ex_5();
 void ex_6();
-double ex_7(int duree, double montant_initial, double taux_interet, double montant_final);
+double ex_7(int, double , double );
 void ex_8();
-void ex_9();
+int ex_9(int);
 void ex_10();
 
 
@@ -48,6 +47,8 @@ int main() {
 	double largeur = 0.0, longueur = 0.0, aire_rectangle = 0.0;
 	int duree = 0;
 	double montant_initial = 0.0, taux_interet = 0.0, montant_final = 0.0;
+	int nb = 0;
+	int val_retour;
 
 	printf("Menu des exercices de la semaine1 :\n");
 	printf(" 1 => ex_1_a\n");
@@ -73,12 +74,18 @@ int main() {
 		switch (choix) {
 		case 1:
 			printf("\nCe programe permet de calculer l’aire d’un cercle => \n\n");
-			calculer_aire_cercle(rayon);
+			printf("Veuillez entrer une valeure decimale pour le rayon: \n");
+			scanf(" %lf", &rayon);
+			aire_cercle = calculer_aire_cercle(rayon);
 			printf("L'aire du cercle est: %.2lf\n", aire_cercle);
 			break;
 		case 2:
 			printf("\nCe programe permet de calculer l’aire d’un rectangle => \n\n");
-			calculer_aire_rectangle(largeur, longueur);
+			printf("Veuillez entrer la largeur du rectangle: \n");
+			scanf(" %lf", &largeur);
+			printf("Veuillez entrer la largeur du rectangle: \n");
+			scanf(" %lf", &longueur);
+			aire_rectangle = calculer_aire_rectangle(largeur, longueur);
 			printf("L'aire du rectangle est: %.2lf\n", aire_rectangle);
 			break;
 		case 3:
@@ -96,6 +103,7 @@ int main() {
 
 		case 6:
 			printf("\nCe programe permet d'indiquer une direction selon votre choix => \n\n");
+			printf("\nCe programe permet d'indiquer une direction selon votre choix => \n\n");
 			ex_4();
 			break;
 		case 7:
@@ -108,20 +116,40 @@ int main() {
 			break;
 		case 9:
 			printf("\nCe programe permet de calculer le montant final d'un placement => \n\n");
-			ex_7(duree, montant_initial, taux_interet, montant_final);
+
+			printf("Quel est le montant initial: ");
+			scanf(" %lf", &montant_initial);
+
+			printf("Quel est la duree: ");
+			scanf(" %d", &duree);
+
+			printf("Quel est le taux d'interet: ");
+			scanf(" %lf", &taux_interet);
+
+			montant_final = ex_7(duree, montant_initial, taux_interet);
+
+			printf(" Le montant final est: %.2lf", montant_final);
 			break;
-			/*case 10:
-			printf("\nCe programe permet d'echanger deux valeurs en memoire => \n\n");
-			Suppl_Ex2();
-			break;
+		case 10:
+			printf("\nCe programe permet d'afficher un carre d'etoile selon la valeur inserer par l'utilisateur => \n\n");
+			ex_8();
 		case 11:
-			printf("\nCe programe permet de calculer le diametre, l'aire et le volume d'une sphere ou l'aire d'un anneau=> \n\n");
-			Suppl_Ex3();
+			printf("\nCe programe permet de determiner si un nombre est premier ou non => \n\n");
+
+			printf("Veuillez entrer un nombre premier: \n");
+			scanf(" %d", &nb);
+			val_retour = ex_9(nb);
+			if (val_retour == 1) {
+				printf("\nle nombre est premier\n");
+			}
+			else {
+				printf("\nLe nombre n'est pas premier\n");
+			}
 			break;
-		case 12:
-			printf("\nCe programe permet de calculer la racine carree d'un nombre a par la methode de Newton => \n\n");
-			Suppl_Ex4();
-			break; */
+			case 12:
+			printf("\nCe programe permet d'afficher le nombre de nombre premier qui a ete trouve => \n\n");
+			ex_10();
+			break;
 		case 13:
 			printf("La vie d'un futur  ingenieur est comme un code à deboguer:");
 			printf("chaque probleme est une enigme a resoudre, et chaque \n");
@@ -154,13 +182,18 @@ double calculer_aire_rectangle(double largeur, double longueur) {
 
 
 void calculer_aire_piece() {
+	
+	double longueur = 0.0;
+	double largeur = 0.0;
+	double rayon = 0.0;
 	double diametre = 0.0;
-	double aire_piece = 0.0;
 	double aire_rectangle = 0.0;
 	double aire_cercle = 0.0;
-	double largeur = 0.0;
-	double longueur = 0.0;
-	double rayon = 0.0;
+	double aire_piece = 0.0;
+	largeur = 0.0;
+	longueur = 0.0;
+	rayon = 0.0;
+
 
 	printf("Veuillez entrer une valeure decimale pour le rayon: \n");
 	scanf(" %lf", &rayon);
@@ -169,16 +202,12 @@ void calculer_aire_piece() {
 	scanf(" %lf", &largeur);
 
 	printf("Veuillez entrer la largeur du rectangle: \n");
-	scanf(" %lf", &largeur);
+	scanf(" %lf", &longueur);
 
+	aire_cercle = calculer_aire_cercle(rayon);
+	aire_rectangle = calculer_aire_rectangle(largeur, longueur);
 
-	calculer_aire_cercle(rayon);
-	calculer_aire_rectangle(largeur, longueur);
-    
 	diametre = rayon * 2;
-
-	printf("L'aire du rectangle est: %.2lf\n", aire_rectangle);
-	printf("L'aire du cercle est: %.2lf\n", aire_cercle);
 
 
 	if (diametre < (longueur * FACTEUR_DE_SECURITE) && diametre < (largeur * FACTEUR_DE_SECURITE)) {
@@ -187,7 +216,7 @@ void calculer_aire_piece() {
 		printf("L'aire de la piece est: %.2lf\n", aire_piece);
 	}
 	else {
-		printf("le facteur de securite n’a pas ete respecte");
+		printf("le facteur de securite n’a pas ete respecte\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -309,29 +338,72 @@ void ex_6() {
 * Retour : montant_final
 */
 
-double ex_7(int duree, double montant_initial, double taux_interet, double montant_final) {
+double ex_7(int duree, double montant_initial, double taux_interet) {
 
-	montant_initial = 0.0;
-	taux_interet = 0.0;
-	montant_final = 0.0;
-	duree = 0;
-	double taux = 0.0;
+	double taux = 1.0;
+	double montant_final = 0.0;
 
-	printf("Quel est le montant initial: ");
-	scanf(" %lf", &montant_initial);
-
-	printf("Quel est la duree: ");
-	scanf(" %d", &duree);
-
-	printf("Quel est le taux d'interet: ");
-	scanf(" %lf", &taux_interet);
-
-	for (int i = 1; i <= duree; i++) {
+	for (int i = 0; i < duree; i++) {
 		taux *= (1 + taux_interet);
 	}
 
-	printf(" Le montant final est: %.2lf", montant_final);
-
 	return montant_final = montant_initial * taux;
 }
-  
+
+void ex_8() {
+
+	int nb = 0;
+
+	printf("Veuillez entrer la grandeur du carre:\n");
+	scanf(" %d", &nb);
+
+	for (int i = 0; i < nb; i++) {
+		for (int j = 0; j < nb; j++){
+			printf("*");
+	}
+		
+	}
+
+}
+
+int ex_9(int nb) {
+
+
+	if (nb != 2 && nb % 2 == 0) {
+
+		return 0;
+	}
+	else if (nb == 2 || nb == 3) {
+		return 1;
+	}
+
+	for (int i = 2; i <= sqrt(nb); i++) {
+
+		if (nb % i == 0) {
+			return 0;
+		}
+	}
+
+	return 1;
+}
+void ex_10() {
+
+	int nb = 0;
+	int val_de_retour = 0;
+	int trouve = 0;
+
+	printf("Veuillez entrer un nombre: \n");
+	scanf(" %d", &nb);
+
+	for (int i = 3; i <= nb; i++) {
+
+		val_de_retour = ex_9(i);
+
+		if (val_de_retour == 1) {
+			printf("\n[%d]\t", i);
+			trouve += 1;
+		}
+	}
+
+	printf("\n%d nombres premier ont ete trouve.\n", trouve);
+}
